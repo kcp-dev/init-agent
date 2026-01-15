@@ -1,0 +1,14 @@
+/_build/
+/dist/
+/_tools/
+/vendor/
+/.kcp.e2e/
+/.e2e/
+/.kcp/
+.cover
+*.kubeconfig
+*.pem
+*.key
+.DS_Store
+/docs/__pycache__
+.idea/
