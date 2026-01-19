@@ -24,6 +24,9 @@ source_repositories:
     cr_paths:
       - docs/cr
     metadata:
-      publishedresources.syncagent.kcp.io:
+      inittargets.initialization.kcp.io:
+        owner:
+          - https://github.com/kcp-dev/init-agent
+      inittemplates.initialization.kcp.io:
         owner:
           - https://github.com/kcp-dev/init-agent
