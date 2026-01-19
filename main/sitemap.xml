@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://docs.kcp.io/init-agent/main/</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/main/"/>
+    </url>
+    <url>
+        <loc>https://docs.kcp.io/init-agent/main/faq/</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/main/faq/"/>
+    </url>
+    <url>
+        <loc>https://docs.kcp.io/init-agent/main/setup/</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/main/setup/"/>
+    </url>
+    <url>
+        <loc>https://docs.kcp.io/init-agent/main/contributing/releasing/</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/main/contributing/releasing/"/>
+    </url>
+    <url>
+        <loc>https://docs.kcp.io/init-agent/main/init-sources/</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/main/init-sources/"/>
+    </url>
+    <url>
+        <loc>https://docs.kcp.io/init-agent/main/init-sources/inittemplate/</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/main/init-sources/inittemplate/"/>
+    </url>
+    <url>
+        <loc>https://docs.kcp.io/init-agent/main/reference/</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/main/reference/"/>
+    </url>
+</urlset>
