@@ -6,28 +6,35 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
+        <meta name="description" content="Custom resource definition (CRD) schema reference page for the InitTemplate
+resource (inittemplates.initialization.kcp.io), as part of the Giant Swarm
+Management API documentation.
+">
       
       
-        <link rel="canonical" href="https://docs.kcp.io/init-agent/main/">
+      
+        <link rel="canonical" href="https://docs.kcp.io/init-agent/main/reference/crd/initialization.kcp.io/inittemplates/">
       
       
+        <link rel="prev" href="../inittargets/">
       
-        <link rel="next" href="setup/">
+      
+        <link rel="next" href="../../../../contributing/releasing/">
       
       
-      <link rel="icon" href="favicons/favicon.ico">
+      <link rel="icon" href="../../../../favicons/favicon.ico">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
     
     
       
-        <title>Documentation - init-agent</title>
+        <title>InitTemplate - init-agent</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.bcfcd587.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.bcfcd587.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="stylesheets/crd.css">
+      <link rel="stylesheet" href="../../../../stylesheets/crd.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -74,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#documentation" class="md-skip">
+        <a href="#inittemplate-crd-schema-reference-group-initializationkcpio" class="md-skip">
           Skip to content
         </a>
       
@@ -92,9 +99,9 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="init-agent" class="md-header__button md-logo" aria-label="init-agent" data-md-component="logo">
+    <a href="../../../.." title="init-agent" class="md-header__button md-logo" aria-label="init-agent" data-md-component="logo">
       
-  <img src="logo.svg" alt="logo">
+  <img src="../../../../logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -111,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Documentation
+              InitTemplate
             
           </span>
         </div>
@@ -226,13 +233,11 @@
         
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="." class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../../.." class="md-tabs__link">
           
   
     
@@ -252,7 +257,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="init-sources/" class="md-tabs__link">
+        <a href="../../../../init-sources/" class="md-tabs__link">
           
   
     
@@ -268,11 +273,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="reference/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../" class="md-tabs__link">
           
   
     
@@ -292,7 +299,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="contributing/releasing/" class="md-tabs__link">
+        <a href="../../../../contributing/releasing/" class="md-tabs__link">
           
   
     
@@ -327,9 +334,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="init-agent" class="md-nav__button md-logo" aria-label="init-agent" data-md-component="logo">
+    <a href="../../../.." title="init-agent" class="md-nav__button md-logo" aria-label="init-agent" data-md-component="logo">
       
-  <img src="logo.svg" alt="logo">
+  <img src="../../../../logo.svg" alt="logo">
 
     </a>
     init-agent
@@ -353,8 +360,6 @@
       
   
   
-    
-  
   
   
     
@@ -371,22 +376,21 @@
     
     
       
-        
-        
-      
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="." class="md-nav__link md-nav__link--active">
+            <a href="../../../.." class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -397,13 +401,13 @@
             </a>
             
               
-              <label class="md-nav__link md-nav__link--active" for="__nav_1" id="__nav_1_label" tabindex="">
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_1">
             <span class="md-nav__icon md-icon"></span>
             Documentation
@@ -419,7 +423,7 @@
   
   
     <li class="md-nav__item">
-      <a href="setup/" class="md-nav__link">
+      <a href="../../../../setup/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -440,7 +444,7 @@
   
   
     <li class="md-nav__item">
-      <a href="faq/" class="md-nav__link">
+      <a href="../../../../faq/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -493,7 +497,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="init-sources/" class="md-nav__link ">
+            <a href="../../../../init-sources/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -526,7 +530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="init-sources/inittemplate/" class="md-nav__link">
+      <a href="../../../../init-sources/inittemplate/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -551,6 +555,8 @@
       
   
   
+    
+  
   
   
     
@@ -565,21 +571,22 @@
     
     
       
+        
+        
+      
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="reference/" class="md-nav__link ">
+            <a href="../../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -590,13 +597,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Reference
@@ -609,8 +616,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -622,13 +631,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
         
           
           <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
@@ -642,7 +649,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3_2">
             <span class="md-nav__icon md-icon"></span>
             CRD
@@ -653,8 +660,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -668,13 +677,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1" checked>
         
           
           <label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
@@ -688,7 +695,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3_2_1">
             <span class="md-nav__icon md-icon"></span>
             initialization.kcp.io
@@ -702,7 +709,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/crd/initialization.kcp.io/inittargets/" class="md-nav__link">
+      <a href="../inittargets/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -720,10 +727,28 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="reference/crd/initialization.kcp.io/inittemplates/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    InitTemplate
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -732,6 +757,33 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#inittemplate-crd-schema-reference-group-initializationkcpio" class="md-nav__link">
+    <span class="md-ellipsis">
+      InitTemplate CRD schema reference (group initialization.kcp.io)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -811,7 +863,7 @@
   
   
     <li class="md-nav__item">
-      <a href="contributing/releasing/" class="md-nav__link">
+      <a href="../../../../contributing/releasing/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -849,8 +901,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -859,18 +909,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#high-level-overview" class="md-nav__link">
+  <a href="#inittemplate-crd-schema-reference-group-initializationkcpio" class="md-nav__link">
     <span class="md-ellipsis">
-      High-level Overview
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mode-of-operation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mode of Operation
+      InitTemplate CRD schema reference (group initialization.kcp.io)
     </span>
   </a>
   
@@ -894,54 +935,132 @@
   
 
 
-<h1 id="documentation">Documentation</h1>
-<p>The kcp init-agent is a Kubernetes agent for initializing newly created workspaces by applying any
-number of Kubernetes objects in it. This can be used to ensure new clusters are automatically
-bootstrapped for certain purposes.</p>
-<p>Behind the scenes the init-agent uses kcp's <code>initializingworkspaces</code> virtual workspace to access new
-clusters before they have become ready (regular access to initializing clusters is forbidden in kcp).
-Once it has finished bootstrapping them, it removes an "initializer" from the cluster to signal to
-kcp that the cluster can become ready.</p>
-<p>The agent can source manifests for the objects to create from a variety of sources in theory, though
-currently only <code>InitTemplate</code> objects are implemented.</p>
-<h2 id="high-level-overview">High-level Overview</h2>
-<p>To setup the agent, an administrator follows roughly these steps:</p>
-<ol>
-<li>Create a dedicated <code>WorkspaceType</code> for which the workspaces should be initialized. This new
-   <code>WorkspaceType</code> must have <code>spec.initializer</code> enabled to ensure kcp marks new workspaces as
-   not-yet-ready.</li>
-<li>Create an <code>InitTarget</code> object that connects the <code>WorkspaceType</code> with the init sources (as of now,
-   a list of <code>InitTemplate</code>s).</li>
-<li>Create a number of <code>InitTemplate</code> objects that contain Kubernetes manifests with Go templating
-   (similar to how Helm templates work).</li>
-<li>Run the init-agent by providing it a kubeconfig to access kcp and the name of the workspace where
-   the <code>InitTarget</code> objects reside.</li>
-</ol>
-<p>This concludes the initial setup. When users now create workspaces using the type created in step 1,
-the init-agent will perform the desired bootstrapping.</p>
-<h2 id="mode-of-operation">Mode of Operation</h2>
-<p>The init-agent will continuously watch <code>InitTarget</code> objects in the <code>--config-workspace</code> it was started
-with. Each of these targets references exactly one <code>WorkspaceType</code> (there must be no overlaps, i.e.
-no two <code>InitTarget</code>s must point to the same <code>WorkspaceType</code>). One single init-agent instance can
-process many <code>InitTarget</code>s (optionally filtered by a label selector configured on the command line).</p>
-<p>For each <code>InitTarget</code>, it will spawn a multicluster-runtime manager that will process all
-clusters that use the <code>WorkspaceType</code> referenced in the target. Whenever a new cluster is created, it
-will be reconciled.</p>
-<p>Reconciliation involves getting the most recent version of the <code>InitTarget</code> and then fetching each
-of its init sources. Each source can provide any number of Kubernetes objects that are first sorted
-to ensure CRDs come first, then namespaces etc., and then applied to the newly created cluster.</p>
-<p>If a resource cannot be found, it is assumed that this is a transient error (for example when one
-init source creates an object using a resource provided by yet another mechanism (maybe another
-initializer, maybe a default APIBinding)). In these cases, reconciliation is retried after a few
-seconds.</p>
-<p>If all objects from all sources were applied cleanly, the initializer is removed from the
-<code>LogicalCluster</code>, which ends the agent's involvement and makes it "disappear" from the agent.</p>
+  <h1>InitTemplate</h1>
+
+<h2 id="inittemplate-crd-schema-reference-group-initializationkcpio">InitTemplate CRD schema reference (group initialization.kcp.io)</h2>
+<div class="lead">Custom resource definition (CRD) schema reference page for the InitTemplate
+resource (inittemplates.initialization.kcp.io), as part of the Giant Swarm
+Management API documentation.
+</div>
+
+<dl class="crd-meta">
+<dt class="fullname">Full name:</dt>
+<dd class="fullname">inittemplates.initialization.kcp.io</dd>
+<dt class="groupname">Group:</dt>
+<dd class="groupname">initialization.kcp.io</dd>
+<dt class="singularname">Singular name:</dt>
+<dd class="singularname">inittemplate</dd>
+<dt class="pluralname">Plural name:</dt>
+<dd class="pluralname">inittemplates</dd>
+<dt class="scope">Scope:</dt>
+<dd class="scope">Cluster</dd>
+<dt class="versions">Versions:</dt>
+<dd class="versions"><a class="version" href="#v1alpha1" title="Show schema for version v1alpha1">v1alpha1</a></dd>
+</dl>
+
+<div class="crd-schema-version">
+<h2 id="v1alpha1">Version v1alpha1</h2>
+
+
+
+<h3 id="property-details-v1alpha1">Properties</h3>
+
+
+<div class="property depth-0">
+<div class="property-header">
+<h3 class="property-path" id="v1alpha1-.apiVersion">.apiVersion</h3>
+</div>
+<div class="property-body">
+<div class="property-meta">
+<span class="property-type">string</span>
+
+</div>
+
+<div class="property-description">
+<p>APIVersion defines the versioned schema of this representation of an object.
+Servers should convert recognized schemas to the latest internal value, and
+may reject unrecognized values.
+More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources</a></p>
+
+</div>
+
+</div>
+</div>
+
+<div class="property depth-0">
+<div class="property-header">
+<h3 class="property-path" id="v1alpha1-.kind">.kind</h3>
+</div>
+<div class="property-body">
+<div class="property-meta">
+<span class="property-type">string</span>
+
+</div>
+
+<div class="property-description">
+<p>Kind is a string value representing the REST resource this object represents.
+Servers may infer this from the endpoint the client submits requests to.
+Cannot be updated.
+In CamelCase.
+More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds</a></p>
+
+</div>
+
+</div>
+</div>
+
+<div class="property depth-0">
+<div class="property-header">
+<h3 class="property-path" id="v1alpha1-.metadata">.metadata</h3>
+</div>
+<div class="property-body">
+<div class="property-meta">
+<span class="property-type">object</span>
+
+</div>
+
+</div>
+</div>
+
+<div class="property depth-0">
+<div class="property-header">
+<h3 class="property-path" id="v1alpha1-.spec">.spec</h3>
+</div>
+<div class="property-body">
+<div class="property-meta">
+<span class="property-type">object</span>
+<span class="property-required">Required</span>
+</div>
+
+</div>
+</div>
+
+<div class="property depth-1">
+<div class="property-header">
+<h3 class="property-path" id="v1alpha1-.spec.template">.spec.template</h3>
+</div>
+<div class="property-body">
+<div class="property-meta">
+<span class="property-type">string</span>
+<span class="property-required">Required</span>
+</div>
+
+</div>
+</div>
+
+
+
+
+</div>
 
 
 
 
 
 
+
+  
+  
 
 
 
@@ -1014,10 +1133,10 @@ seconds.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.indexes", "navigation.tabs", "navigation.expand", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.indexes", "navigation.tabs", "navigation.expand", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="assets/javascripts/bundle.1e8ae164.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.1e8ae164.min.js"></script>
       
     
   </body>
