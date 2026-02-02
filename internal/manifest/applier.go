@@ -21,10 +21,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/kcp-dev/init-agent/internal/kcp"
 	"github.com/kcp-dev/init-agent/internal/log"
-
-	"github.com/kcp-dev/logicalcluster/v3"
 
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/api/meta"
@@ -32,46 +29,21 @@ import (
 	ctrlruntimeclient "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-type ClusterApplier interface {
-	Cluster(cluster logicalcluster.Name) (Applier, error)
-}
-
 type Applier interface {
-	Apply(ctx context.Context, objs []*unstructured.Unstructured) (requeue bool, err error)
+	Apply(ctx context.Context, client ctrlruntimeclient.Client, objs []*unstructured.Unstructured) (requeue bool, err error)
 }
 
-type clusterApplier struct {
-	cc kcp.ClusterClient
+type applier struct{}
+
+func NewApplier() Applier {
+	return &applier{}
 }
 
-func NewClusterApplier(cc kcp.ClusterClient) ClusterApplier {
-	return &clusterApplier{cc: cc}
-}
-
-func (a *clusterApplier) Cluster(cluster logicalcluster.Name) (Applier, error) {
-	client, err := a.cc.Cluster(cluster, nil) // using unstructured, no scheme needed
-	if err != nil {
-		return nil, err
-	}
-
-	return &applier{client: client}, nil
-}
-
-type applier struct {
-	client ctrlruntimeclient.Client
-}
-
-func NewApplier(client ctrlruntimeclient.Client) Applier {
-	return &applier{
-		client: client,
-	}
-}
-
-func (a *applier) Apply(ctx context.Context, objs []*unstructured.Unstructured) (requeue bool, err error) {
+func (a *applier) Apply(ctx context.Context, client ctrlruntimeclient.Client, objs []*unstructured.Unstructured) (requeue bool, err error) {
 	SortObjectsByHierarchy(objs)
 
 	for _, object := range objs {
-		err := a.applyObject(ctx, object)
+		err := a.applyObject(ctx, client, object)
 		if err != nil {
 			if errors.Is(err, &meta.NoKindMatchError{}) {
 				return true, nil
@@ -84,7 +56,7 @@ func (a *applier) Apply(ctx context.Context, objs []*unstructured.Unstructured) 
 	return false, nil
 }
 
-func (a *applier) applyObject(ctx context.Context, obj *unstructured.Unstructured) error {
+func (a *applier) applyObject(ctx context.Context, client ctrlruntimeclient.Client, obj *unstructured.Unstructured) error {
 	gvk := obj.GroupVersionKind()
 
 	key := ctrlruntimeclient.ObjectKeyFromObject(obj).String()
@@ -94,7 +66,7 @@ func (a *applier) applyObject(ctx context.Context, obj *unstructured.Unstructure
 	logger := log.FromContext(ctx)
 	logger.Debugw("Applying object", "obj-key", key, "obj-gvk", gvk)
 
-	if err := a.client.Create(ctx, obj); err != nil {
+	if err := client.Create(ctx, obj); err != nil {
 		if !apierrors.IsAlreadyExists(err) {
 			return err
 		}

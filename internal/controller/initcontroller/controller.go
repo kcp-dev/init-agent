@@ -41,12 +41,12 @@ const (
 type InitTargetProvider func(ctx context.Context) (*initializationv1alpha1.InitTarget, error)
 
 type Reconciler struct {
-	remoteManager  mcmanager.Manager
-	targetProvider InitTargetProvider
-	log            *zap.SugaredLogger
-	sourceFactory  *source.Factory
-	clusterApplier manifest.ClusterApplier
-	initializer    kcpcorev1alpha1.LogicalClusterInitializer
+	remoteManager   mcmanager.Manager
+	targetProvider  InitTargetProvider
+	log             *zap.SugaredLogger
+	sourceFactory   *source.Factory
+	manifestApplier manifest.Applier
+	initializer     kcpcorev1alpha1.LogicalClusterInitializer
 }
 
 // Create creates a new controller and importantly does *not* add it to the manager,
@@ -55,7 +55,7 @@ func Create(
 	remoteManager mcmanager.Manager,
 	targetProvider InitTargetProvider,
 	sourceFactory *source.Factory,
-	clusterApplier manifest.ClusterApplier,
+	manifestApplier manifest.Applier,
 	initializer kcpcorev1alpha1.LogicalClusterInitializer,
 	log *zap.SugaredLogger,
 	numWorkers int,
@@ -70,11 +70,11 @@ func Create(
 		}).
 		For(&kcpcorev1alpha1.LogicalCluster{}).
 		Complete(&Reconciler{
-			remoteManager:  remoteManager,
-			targetProvider: targetProvider,
-			log:            log.Named(ControllerName),
-			sourceFactory:  sourceFactory,
-			clusterApplier: clusterApplier,
-			initializer:    initializer,
+			remoteManager:   remoteManager,
+			targetProvider:  targetProvider,
+			log:             log.Named(ControllerName),
+			sourceFactory:   sourceFactory,
+			manifestApplier: manifestApplier,
+			initializer:     initializer,
 		})
 }

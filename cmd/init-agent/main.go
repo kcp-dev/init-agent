@@ -103,9 +103,9 @@ func run(ctx context.Context, log *zap.SugaredLogger, opts *Options) error {
 		return fmt.Errorf("failed to setup source factory: %w", err)
 	}
 
-	// clusterApplier controls how the manifests of an init source are applied in
+	// manifestApplier controls how the manifests of an init source are applied in
 	// the target workspace
-	clusterApplier := manifest.NewClusterApplier(clusterClient)
+	manifestApplier := manifest.NewApplier()
 
 	// create the ctrl-runtime manager
 	mgr, err := setupManager(ctx, cfg, opts)
@@ -119,7 +119,7 @@ func run(ctx context.Context, log *zap.SugaredLogger, opts *Options) error {
 	// wrap this controller creation in a closure to prevent giving all the initcontroller
 	// dependencies to the targetcontroller
 	newInitController := func(remoteManager mcmanager.Manager, targetProvider initcontroller.InitTargetProvider, initializer kcpcorev1alpha1.LogicalClusterInitializer) error {
-		return initcontroller.Create(remoteManager, targetProvider, sourceFactory, clusterApplier, initializer, log, numInitWorkers)
+		return initcontroller.Create(remoteManager, targetProvider, sourceFactory, manifestApplier, initializer, log, numInitWorkers)
 	}
 
 	if err := targetcontroller.Add(ctx, mgr, log, opts.InitTargetSelector, clusterClient, newInitController); err != nil {

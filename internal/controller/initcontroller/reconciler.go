@@ -96,11 +96,6 @@ func (r *Reconciler) reconcile(ctx context.Context, logger *zap.SugaredLogger, c
 		return requeue, fmt.Errorf("failed to get InitTarget: %w", err)
 	}
 
-	applier, err := r.clusterApplier.Cluster(initialize.ClusterFromContext(ctx))
-	if err != nil {
-		return requeue, fmt.Errorf("failed to construct manifests applier: %w", err)
-	}
-
 	for idx, ref := range target.Spec.Sources {
 		sourceLog := logger.With("init-target", target.Name, "source-idx", idx)
 		sourceCtx := log.WithLog(ctx, sourceLog)
@@ -117,7 +112,7 @@ func (r *Reconciler) reconcile(ctx context.Context, logger *zap.SugaredLogger, c
 
 		sourceLog.Debugf("Source yielded %d manifests", len(objects))
 
-		srcNeedRequeue, err := applier.Apply(sourceCtx, objects)
+		srcNeedRequeue, err := r.manifestApplier.Apply(sourceCtx, client, objects)
 		if err != nil {
 			return requeue, fmt.Errorf("failed to apply source #%d: %w", idx, err)
 		}
