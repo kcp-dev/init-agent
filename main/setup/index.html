@@ -524,6 +524,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Running the Agent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helm-chart" class="md-nav__link">
+    <span class="md-ellipsis">
+      Helm Chart
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#locally" class="md-nav__link">
+    <span class="md-ellipsis">
+      Locally
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1018,6 +1042,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Running the Agent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helm-chart" class="md-nav__link">
+    <span class="md-ellipsis">
+      Helm Chart
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#locally" class="md-nav__link">
+    <span class="md-ellipsis">
+      Locally
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1160,6 +1208,32 @@ are created before objects using them.</p>
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cluster-info-configmap</span>
 </code></pre></div>
 <h2 id="running-the-agent">Running the Agent</h2>
+<p>For regular use, the init-agent should be installed using its <a href="https://github.com/kcp-dev/helm-charts/tree/main/charts/init-agent">Helm chart</a>, but for
+debugging purposes it's also possible to run the agent locally.</p>
+<h3 id="helm-chart">Helm Chart</h3>
+<p>To use the Helm chart, first add the repository to your local system:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>kcp<span class="w"> </span>https://kcp-dev.github.io/helm-charts
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>helm<span class="w"> </span>repo<span class="w"> </span>update
+</code></pre></div>
+<p>At the very least you will have to provide</p>
+<ul>
+<li>a kubeconfig to access kcp</li>
+<li>the name of the workspace/cluster where the <code>InitTargets</code> and other resources
+  reside</li>
+</ul>
+<p>Put both in your <code>myvalues.yaml</code> (check the <code>values.yaml</code> for more examples).</p>
+<p>You can now install the chart:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>my-init-agent<span class="w"> </span>kcp/init-agent<span class="w"> </span>--values<span class="w"> </span>./myvalues.yaml
+</code></pre></div>
+<h3 id="locally">Locally</h3>
+<p>For development purposes you can run the agent directly. You can build your own from
+source or download one of the <a href="https://github.com/kcp-dev/init-agent/releases">ready-made releases</a>. To run it, you need
+to provide the kcp kubeconfig and the workspace/cluster where the <code>InitTargets</code>
+reside:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>./init-agent<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span>--kubeconfig<span class="w"> </span>/path/to/kcp.kubeconfig<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span>--config-workspace<span class="w"> </span>root:my-org:init-agent
+</code></pre></div>
 
 
 

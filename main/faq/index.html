@@ -451,6 +451,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Frequently Asked Questions
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -460,6 +471,43 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#can-i-addupdate-objects-to-already-initialized-clusters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Can I add/update objects to already initialized clusters?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#can-inittargets-generate-random-data-like-passwords" class="md-nav__link">
+    <span class="md-ellipsis">
+      Can InitTargets generate random data, like passwords?
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -864,6 +912,32 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#can-i-addupdate-objects-to-already-initialized-clusters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Can I add/update objects to already initialized clusters?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#can-inittargets-generate-random-data-like-passwords" class="md-nav__link">
+    <span class="md-ellipsis">
+      Can InitTargets generate random data, like passwords?
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -881,7 +955,18 @@
 
 
 <h1 id="frequently-asked-questions">Frequently Asked Questions</h1>
-<p>TBD</p>
+<h2 id="can-i-addupdate-objects-to-already-initialized-clusters">Can I add/update objects to already initialized clusters?</h2>
+<p>No. Once the initialization is completed (and the initializer removed from the
+<code>LogicalCluster</code>), the init-agent has no way to access the newly created cluster
+anymore, so it also cannot reconcile after that point.</p>
+<p>Reconciling behaviour is planned for future releases, but the exact approach is
+not yet decided.</p>
+<h2 id="can-inittargets-generate-random-data-like-passwords">Can <code>InitTargets</code> generate random data, like passwords?</h2>
+<p>Yes! <code>InitTemplates</code> can make use of the entire <a href="https://masterminds.github.io/sprig/">sprig</a> library, which
+includes functions to generate passwords, UUIDs etc.</p>
+<p>However, the init-agent has no memory, so if one initialization round fails
+and then agent re-tries, it will re-render all templates and so generate new,
+different random data.</p>
 
 
 
