@@ -43,6 +43,10 @@ type Options struct {
 	// manage coordination/v1 leases)
 	EnableLeaderElection bool
 
+	// LeaderElectionNamespace is the Kubernetes namespace in which the leader
+	// election lease will be created.
+	LeaderElectionNamespace string
+
 	InitTargetSelectorString string
 	InitTargetSelector       labels.Selector
 
@@ -66,6 +70,7 @@ func (o *Options) AddFlags(flags *pflag.FlagSet) {
 	flags.StringVar(&o.ConfigWorkspace, "config-workspace", o.ConfigWorkspace, "kcp workspace or cluster where the InitTargets live that should be processed")
 	flags.StringVar(&o.InitTargetSelectorString, "init-target-selector", o.InitTargetSelectorString, "restrict to only process InitTargets matching this label selector (optional)")
 	flags.BoolVar(&o.EnableLeaderElection, "enable-leader-election", o.EnableLeaderElection, "whether to perform leader election")
+	flags.StringVar(&o.LeaderElectionNamespace, "leader-election-namespace", o.LeaderElectionNamespace, "Kubernetes namespace for the leader election lease")
 	flags.StringVar(&o.MetricsAddr, "metrics-address", o.MetricsAddr, "host and port to serve Prometheus metrics via /metrics (HTTP)")
 	flags.StringVar(&o.HealthAddr, "health-address", o.HealthAddr, "host and port to serve probes via /readyz and /healthz (HTTP)")
 }
@@ -79,6 +84,10 @@ func (o *Options) Validate() error {
 
 	if len(o.ConfigWorkspace) == 0 {
 		errs = append(errs, errors.New("--config-workspace is required"))
+	}
+
+	if o.EnableLeaderElection && len(o.LeaderElectionNamespace) == 0 {
+		errs = append(errs, errors.New("--leader-election-namespace is required when --enable-leader-election is true"))
 	}
 
 	if s := o.InitTargetSelectorString; len(s) > 0 {
