@@ -6,35 +6,30 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Custom resource definition (CRD) schema reference page for the InitTarget
-resource (inittargets.initialization.kcp.io), as part of the Giant Swarm
-Management API documentation.
-">
       
       
-      
-        <link rel="canonical" href="https://docs.kcp.io/init-agent/main/reference/crd/initialization.kcp.io/inittargets/">
-      
-      
-        <link rel="prev" href="../../../">
+        <link rel="canonical" href="https://docs.kcp.io/init-agent/main/readiness/">
       
       
-        <link rel="next" href="../inittemplates/">
+        <link rel="prev" href="../setup/">
       
       
-      <link rel="icon" href="../../../../favicons/favicon.ico">
+        <link rel="next" href="../faq/">
+      
+      
+      <link rel="icon" href="../favicons/favicon.ico">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
     
     
       
-        <title>InitTarget - init-agent</title>
+        <title>Waiting for Readiness - init-agent</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.bcfcd587.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.bcfcd587.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -53,9 +48,9 @@ Management API documentation.
       
     
     
-      <link rel="stylesheet" href="../../../../stylesheets/crd.css">
+      <link rel="stylesheet" href="../stylesheets/crd.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -81,7 +76,7 @@ Management API documentation.
     <div data-md-component="skip">
       
         
-        <a href="#inittarget-crd-schema-reference-group-initializationkcpio" class="md-skip">
+        <a href="#waiting-for-readiness" class="md-skip">
           Skip to content
         </a>
       
@@ -99,9 +94,9 @@ Management API documentation.
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../.." title="init-agent" class="md-header__button md-logo" aria-label="init-agent" data-md-component="logo">
+    <a href=".." title="init-agent" class="md-header__button md-logo" aria-label="init-agent" data-md-component="logo">
       
-  <img src="../../../../logo.svg" alt="logo">
+  <img src="../logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -118,7 +113,7 @@ Management API documentation.
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              InitTarget
+              Waiting for Readiness
             
           </span>
         </div>
@@ -233,11 +228,13 @@ Management API documentation.
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../../.." class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href=".." class="md-tabs__link">
           
   
     
@@ -257,7 +254,7 @@ Management API documentation.
     
     
       <li class="md-tabs__item">
-        <a href="../../../../init-sources/" class="md-tabs__link">
+        <a href="../init-sources/" class="md-tabs__link">
           
   
     
@@ -273,13 +270,11 @@ Management API documentation.
         
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../reference/" class="md-tabs__link">
           
   
     
@@ -299,7 +294,7 @@ Management API documentation.
     
     
       <li class="md-tabs__item">
-        <a href="../../../../contributing/releasing/" class="md-tabs__link">
+        <a href="../contributing/releasing/" class="md-tabs__link">
           
   
     
@@ -334,9 +329,9 @@ Management API documentation.
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../.." title="init-agent" class="md-nav__button md-logo" aria-label="init-agent" data-md-component="logo">
+    <a href=".." title="init-agent" class="md-nav__button md-logo" aria-label="init-agent" data-md-component="logo">
       
-  <img src="../../../../logo.svg" alt="logo">
+  <img src="../logo.svg" alt="logo">
 
     </a>
     init-agent
@@ -360,6 +355,8 @@ Management API documentation.
       
   
   
+    
+  
   
   
     
@@ -378,21 +375,22 @@ Management API documentation.
     
     
       
+        
+        
+      
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../.." class="md-nav__link ">
+            <a href=".." class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -403,13 +401,13 @@ Management API documentation.
             </a>
             
               
-              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_1">
             <span class="md-nav__icon md-icon"></span>
             Documentation
@@ -425,7 +423,7 @@ Management API documentation.
   
   
     <li class="md-nav__item">
-      <a href="../../../../setup/" class="md-nav__link">
+      <a href="../setup/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -443,10 +441,30 @@ Management API documentation.
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../../readiness/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Waiting for Readiness
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -455,6 +473,44 @@ Management API documentation.
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How It Works
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -467,7 +523,7 @@ Management API documentation.
   
   
     <li class="md-nav__item">
-      <a href="../../../../faq/" class="md-nav__link">
+      <a href="../faq/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -520,7 +576,7 @@ Management API documentation.
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../init-sources/" class="md-nav__link ">
+            <a href="../init-sources/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -553,7 +609,7 @@ Management API documentation.
   
   
     <li class="md-nav__item">
-      <a href="../../../../init-sources/inittemplate/" class="md-nav__link">
+      <a href="../init-sources/inittemplate/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -578,8 +634,6 @@ Management API documentation.
       
   
   
-    
-  
   
   
     
@@ -594,22 +648,21 @@ Management API documentation.
     
     
       
-        
-        
-      
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../" class="md-nav__link ">
+            <a href="../reference/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -620,13 +673,13 @@ Management API documentation.
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Reference
@@ -639,8 +692,6 @@ Management API documentation.
                 
   
   
-    
-  
   
   
     
@@ -654,11 +705,13 @@ Management API documentation.
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
         
           
           <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
@@ -672,7 +725,7 @@ Management API documentation.
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_2">
             <span class="md-nav__icon md-icon"></span>
             CRD
@@ -683,10 +736,8 @@ Management API documentation.
                 
   
   
-    
   
   
-  
     
     
       
@@ -700,11 +751,13 @@ Management API documentation.
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2_1" >
         
           
           <label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
@@ -718,7 +771,7 @@ Management API documentation.
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_2_1">
             <span class="md-nav__icon md-icon"></span>
             initialization.kcp.io
@@ -729,28 +782,10 @@ Management API documentation.
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    InitTarget
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../reference/crd/initialization.kcp.io/inittargets/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -759,33 +794,6 @@ Management API documentation.
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#inittarget-crd-schema-reference-group-initializationkcpio" class="md-nav__link">
-    <span class="md-ellipsis">
-      InitTarget CRD schema reference (group initialization.kcp.io)
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -798,7 +806,7 @@ Management API documentation.
   
   
     <li class="md-nav__item">
-      <a href="../inittemplates/" class="md-nav__link">
+      <a href="../reference/crd/initialization.kcp.io/inittemplates/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -886,7 +894,7 @@ Management API documentation.
   
   
     <li class="md-nav__item">
-      <a href="../../../../contributing/releasing/" class="md-nav__link">
+      <a href="../contributing/releasing/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -924,6 +932,8 @@ Management API documentation.
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -932,9 +942,18 @@ Management API documentation.
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#inittarget-crd-schema-reference-group-initializationkcpio" class="md-nav__link">
+  <a href="#how-it-works" class="md-nav__link">
     <span class="md-ellipsis">
-      InitTarget CRD schema reference (group initialization.kcp.io)
+      How It Works
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
     </span>
   </a>
   
@@ -958,210 +977,115 @@ Management API documentation.
   
 
 
-  <h1>InitTarget</h1>
-
-<h2 id="inittarget-crd-schema-reference-group-initializationkcpio">InitTarget CRD schema reference (group initialization.kcp.io)</h2>
-<div class="lead">Custom resource definition (CRD) schema reference page for the InitTarget
-resource (inittargets.initialization.kcp.io), as part of the Giant Swarm
-Management API documentation.
+<h1 id="waiting-for-readiness">Waiting for Readiness</h1>
+<p>In some scenarios, simply creating objects during initialization is not enough. You may need to wait for
+certain resources to become ready before the init-agent marks the workspace as initialized. For example,
+a CRD must be <code>Established</code> before custom resources using it can be created by other initializers
+further down the chain.</p>
+<p>The <code>initialization.kcp.io/wait-for-ready</code> annotation allows you to express this requirement on
+individual manifests.</p>
+<h2 id="how-it-works">How It Works</h2>
+<p>When the init-agent encounters a manifest (from any of its <a href="./init-sources/">init sources</a>) with
+the <code>initialization.kcp.io/wait-for-ready</code> annotation, it will:</p>
+<ol>
+<li>Create (or confirm the existence of) the object as usual.</li>
+<li>Re-fetch the object's current state from the API server.</li>
+<li>Check whether the condition type specified in the annotation's value has <code>status: "True"</code> in the
+   object's <code>status.conditions</code> list.</li>
+<li>If the condition is not yet <code>True</code>, the agent requeues reconciliation and tries again after a few
+   seconds.</li>
+<li>Only once <strong>all</strong> annotated objects across <strong>all</strong> sources have their required conditions met will
+   the agent remove the initializer from the workspace, completing initialization.</li>
+</ol>
+<p>The annotation value must be the <strong>name of a condition type</strong> (e.g. <code>Established</code>, <code>Ready</code>,
+<code>Available</code>). This condition must appear in the standard Kubernetes <code>status.conditions</code> array of
+the resource.</p>
+<div class="admonition warning">
+<p class="admonition-title">Important</p>
+<p>Waiting for a condition to become <code>True</code> inherently means that <strong>some process must set that
+condition</strong>. In some cases this happens automatically (e.g. the Kubernetes API server sets
+<code>Established</code> on CRDs), but in other cases you may need a dedicated controller or operator to
+act on the resource and update its status.</p>
+<p>Due to the nature of kcp's workspace initialization, the workspace is not accessible through
+the regular API while it still has initializers. Only processes that work through the same
+<code>initializingworkspaces</code> virtual workspace – i.e. processes that are registered for the <strong>same
+initializer</strong> as the init-agent – can see and modify objects in the workspace during
+initialization.</p>
+<p>This means that if you need an external controller to make a resource "ready", that controller
+must also operate on the same initializer's <code>initializingworkspaces</code> view. Without this, the
+controller will not be able to access the workspace and therefore cannot set the condition the
+init-agent is waiting for. The initialization would be stuck indefinitely.</p>
+<p>In practice, this is most relevant for custom operators that need to reconcile resources created
+by the init-agent. Make sure these operators have the appropriate kcp permissions and are
+configured to watch the same initializing workspaces.</p>
 </div>
-
-<dl class="crd-meta">
-<dt class="fullname">Full name:</dt>
-<dd class="fullname">inittargets.initialization.kcp.io</dd>
-<dt class="groupname">Group:</dt>
-<dd class="groupname">initialization.kcp.io</dd>
-<dt class="singularname">Singular name:</dt>
-<dd class="singularname">inittarget</dd>
-<dt class="pluralname">Plural name:</dt>
-<dd class="pluralname">inittargets</dd>
-<dt class="scope">Scope:</dt>
-<dd class="scope">Cluster</dd>
-<dt class="versions">Versions:</dt>
-<dd class="versions"><a class="version" href="#v1alpha1" title="Show schema for version v1alpha1">v1alpha1</a></dd>
-</dl>
-
-<div class="crd-schema-version">
-<h2 id="v1alpha1">Version v1alpha1</h2>
-
-
-
-<h3 id="property-details-v1alpha1">Properties</h3>
-
-
-<div class="property depth-0">
-<div class="property-header">
-<h3 class="property-path" id="v1alpha1-.apiVersion">.apiVersion</h3>
-</div>
-<div class="property-body">
-<div class="property-meta">
-<span class="property-type">string</span>
-
-</div>
-
-<div class="property-description">
-<p>APIVersion defines the versioned schema of this representation of an object.
-Servers should convert recognized schemas to the latest internal value, and
-may reject unrecognized values.
-More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources</a></p>
-
-</div>
-
-</div>
-</div>
-
-<div class="property depth-0">
-<div class="property-header">
-<h3 class="property-path" id="v1alpha1-.kind">.kind</h3>
-</div>
-<div class="property-body">
-<div class="property-meta">
-<span class="property-type">string</span>
-
-</div>
-
-<div class="property-description">
-<p>Kind is a string value representing the REST resource this object represents.
-Servers may infer this from the endpoint the client submits requests to.
-Cannot be updated.
-In CamelCase.
-More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds</a></p>
-
-</div>
-
-</div>
-</div>
-
-<div class="property depth-0">
-<div class="property-header">
-<h3 class="property-path" id="v1alpha1-.metadata">.metadata</h3>
-</div>
-<div class="property-body">
-<div class="property-meta">
-<span class="property-type">object</span>
-
-</div>
-
-</div>
-</div>
-
-<div class="property depth-0">
-<div class="property-header">
-<h3 class="property-path" id="v1alpha1-.spec">.spec</h3>
-</div>
-<div class="property-body">
-<div class="property-meta">
-<span class="property-type">object</span>
-<span class="property-required">Required</span>
-</div>
-
-</div>
-</div>
-
-<div class="property depth-1">
-<div class="property-header">
-<h3 class="property-path" id="v1alpha1-.spec.sources">.spec.sources</h3>
-</div>
-<div class="property-body">
-<div class="property-meta">
-<span class="property-type">array</span>
-<span class="property-required">Required</span>
-</div>
-
-</div>
-</div>
-
-<div class="property depth-2">
-<div class="property-header">
-<h3 class="property-path" id="v1alpha1-.spec.sources[*]">.spec.sources[*]</h3>
-</div>
-<div class="property-body">
-<div class="property-meta">
-<span class="property-type">object</span>
-
-</div>
-
-</div>
-</div>
-
-<div class="property depth-3">
-<div class="property-header">
-<h3 class="property-path" id="v1alpha1-.spec.sources[*].template">.spec.sources[*].template</h3>
-</div>
-<div class="property-body">
-<div class="property-meta">
-<span class="property-type">object</span>
-
-</div>
-
-</div>
-</div>
-
-<div class="property depth-4">
-<div class="property-header">
-<h3 class="property-path" id="v1alpha1-.spec.sources[*].template.name">.spec.sources[*].template.name</h3>
-</div>
-<div class="property-body">
-<div class="property-meta">
-<span class="property-type">string</span>
-<span class="property-required">Required</span>
-</div>
-
-</div>
-</div>
-
-<div class="property depth-1">
-<div class="property-header">
-<h3 class="property-path" id="v1alpha1-.spec.workspaceTypeRef">.spec.workspaceTypeRef</h3>
-</div>
-<div class="property-body">
-<div class="property-meta">
-<span class="property-type">object</span>
-<span class="property-required">Required</span>
-</div>
-
-</div>
-</div>
-
-<div class="property depth-2">
-<div class="property-header">
-<h3 class="property-path" id="v1alpha1-.spec.workspaceTypeRef.name">.spec.workspaceTypeRef.name</h3>
-</div>
-<div class="property-body">
-<div class="property-meta">
-<span class="property-type">string</span>
-<span class="property-required">Required</span>
-</div>
-
-</div>
-</div>
-
-<div class="property depth-2">
-<div class="property-header">
-<h3 class="property-path" id="v1alpha1-.spec.workspaceTypeRef.path">.spec.workspaceTypeRef.path</h3>
-</div>
-<div class="property-body">
-<div class="property-meta">
-<span class="property-type">string</span>
-<span class="property-required">Required</span>
-</div>
-
-</div>
-</div>
-
-
-
-
-</div>
+<h2 id="usage">Usage</h2>
+<p>Add the annotation to any manifest inside an <code>InitTemplate</code>'s <code>spec.template</code>. The following example
+creates a CRD and waits for it to become <code>Established</code> before initialization is considered complete:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">initialization.kcp.io/v1alpha1</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">InitTemplate</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">widgets-crd</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="no">apiVersion: apiextensions.k8s.io/v1</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="no">kind: CustomResourceDefinition</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="no">metadata:</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">      </span><span class="no">name: widgets.example.com</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">      </span><span class="no">annotations:</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">        </span><span class="no">initialization.kcp.io/wait-for-ready: &quot;Established&quot;</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="no">spec:</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">      </span><span class="no">group: example.com</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">      </span><span class="no">names:</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">        </span><span class="no">kind: Widget</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">        </span><span class="no">listKind: WidgetList</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">        </span><span class="no">plural: widgets</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">        </span><span class="no">singular: widget</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">      </span><span class="no">scope: Cluster</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">      </span><span class="no">versions:</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">        </span><span class="no">- name: v1alpha1</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">          </span><span class="no">served: true</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">          </span><span class="no">storage: true</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">          </span><span class="no">schema:</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">            </span><span class="no">openAPIV3Schema:</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">              </span><span class="no">type: object</span>
+</code></pre></div>
+<p>In this example the init-agent will create the CRD and then wait until its <code>Established</code> condition
+is <code>True</code> before considering this source complete. CRDs are just a nice example of a Kube-native
+resource that on its own becomes ready.</p>
+<p>The agent will keep retrying indefinitely. If a condition is never set, the workspace will remain
+in the initializing state. Use kcp's workspace lifecycle management to handle stuck workspaces if
+necessary.</p>
+<p>The annotation works with <strong>any Kubernetes resource</strong> that follows the standard conditions pattern
+in its status. Common examples include:</p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Typical Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CustomResourceDefinition</code></td>
+<td><code>Established</code></td>
+</tr>
+<tr>
+<td><code>Deployment</code></td>
+<td><code>Available</code></td>
+</tr>
+<tr>
+<td><code>APIBinding</code> (kcp)</td>
+<td><code>Ready</code></td>
+</tr>
+</tbody>
+</table>
 
 
 
 
 
 
-
-  
-  
 
 
 
@@ -1234,10 +1158,10 @@ More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architec
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.indexes", "navigation.tabs", "navigation.expand", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.tabs", "navigation.expand", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      <script src="../assets/javascripts/bundle.1e8ae164.min.js"></script>
       
     
   </body>
