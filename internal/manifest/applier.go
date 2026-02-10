@@ -75,7 +75,7 @@ func (a *applier) Apply(ctx context.Context, client ctrlruntimeclient.Client, ob
 			return false, err
 		}
 
-		if !HasCondition(current, conditionType) {
+		if !hasCondition(current, conditionType) {
 			logger := a.objectLogger(ctx, object)
 			logger.Debugw("Waiting for condition", "condition", conditionType)
 			requeue = true

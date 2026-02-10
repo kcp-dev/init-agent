@@ -20,9 +20,9 @@ import (
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 )
 
-// HasCondition checks if an unstructured object has the specified condition
+// hasCondition checks if an unstructured object has the specified condition
 // type with status "True".
-func HasCondition(obj *unstructured.Unstructured, conditionType string) bool {
+func hasCondition(obj *unstructured.Unstructured, conditionType string) bool {
 	conditions, found, err := unstructured.NestedSlice(obj.Object, "status", "conditions")
 	if err != nil || !found {
 		return false

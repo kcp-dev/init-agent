@@ -130,7 +130,7 @@ func TestHasCondition(t *testing.T) {
 
 	for _, tt := range testcases {
 		t.Run(tt.name, func(t *testing.T) {
-			result := HasCondition(tt.obj, tt.conditionType)
+			result := hasCondition(tt.obj, tt.conditionType)
 			if result != tt.expected {
 				t.Fatalf("Expected %v.", tt.expected)
 			}
