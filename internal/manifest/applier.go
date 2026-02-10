@@ -21,7 +21,10 @@ import (
 	"errors"
 	"strings"
 
+	"go.uber.org/zap"
+
 	"github.com/kcp-dev/init-agent/internal/log"
+	"github.com/kcp-dev/init-agent/sdk/types"
 
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/api/meta"
@@ -53,18 +56,38 @@ func (a *applier) Apply(ctx context.Context, client ctrlruntimeclient.Client, ob
 		}
 	}
 
-	return false, nil
+	// After creating objects, check readiness of annotated ones
+	for _, object := range objs {
+		conditionType := object.GetAnnotations()[types.WaitForReadyAnnotation]
+		if conditionType == "" {
+			continue
+		}
+
+		// Fetch current state
+		current := &unstructured.Unstructured{}
+		current.SetGroupVersionKind(object.GroupVersionKind())
+
+		if err := client.Get(ctx, ctrlruntimeclient.ObjectKeyFromObject(object), current); err != nil {
+			if apierrors.IsNotFound(err) {
+				requeue = true
+				continue
+			}
+			return false, err
+		}
+
+		if !HasCondition(current, conditionType) {
+			logger := a.objectLogger(ctx, object)
+			logger.Debugw("Waiting for condition", "condition", conditionType)
+			requeue = true
+		}
+	}
+
+	return requeue, nil
 }
 
 func (a *applier) applyObject(ctx context.Context, client ctrlruntimeclient.Client, obj *unstructured.Unstructured) error {
-	gvk := obj.GroupVersionKind()
-
-	key := ctrlruntimeclient.ObjectKeyFromObject(obj).String()
-	// make key look prettier for cluster-scoped objects
-	key = strings.TrimLeft(key, "/")
-
-	logger := log.FromContext(ctx)
-	logger.Debugw("Applying object", "obj-key", key, "obj-gvk", gvk)
+	logger := a.objectLogger(ctx, obj)
+	logger.Debugw("Applying object")
 
 	if err := client.Create(ctx, obj); err != nil {
 		if !apierrors.IsAlreadyExists(err) {
@@ -73,4 +96,14 @@ func (a *applier) applyObject(ctx context.Context, client ctrlruntimeclient.Clie
 	}
 
 	return nil
+}
+
+func (a *applier) objectLogger(ctx context.Context, obj *unstructured.Unstructured) *zap.SugaredLogger {
+	gvk := obj.GroupVersionKind()
+
+	key := ctrlruntimeclient.ObjectKeyFromObject(obj).String()
+	// make key look prettier for cluster-scoped objects
+	key = strings.TrimLeft(key, "/")
+
+	return log.FromContext(ctx).With("obj-key", key, "obj-gvk", gvk)
 }
