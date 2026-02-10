@@ -154,8 +154,8 @@ func setupManager(ctx context.Context, cfg *rest.Config, opts *Options) (manager
 		},
 		Metrics:                 metricsserver.Options{BindAddress: opts.MetricsAddr},
 		LeaderElection:          opts.EnableLeaderElection,
-		LeaderElectionID:        "TODO",
-		LeaderElectionNamespace: "le-ns-todo",
+		LeaderElectionID:        "init-agent.kcp.io",
+		LeaderElectionNamespace: opts.LeaderElectionNamespace,
 		HealthProbeBindAddress:  opts.HealthAddr,
 	})
 }
