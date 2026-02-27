@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://docs.kcp.io/init-agent/v0.1/</loc>
+        <lastmod>2026-02-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.1/"/>
+    </url>
+    <url>
+        <loc>https://docs.kcp.io/init-agent/v0.1/faq/</loc>
+        <lastmod>2026-02-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.1/faq/"/>
+    </url>
+    <url>
+        <loc>https://docs.kcp.io/init-agent/v0.1/setup/</loc>
+        <lastmod>2026-02-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.1/setup/"/>
+    </url>
+    <url>
+        <loc>https://docs.kcp.io/init-agent/v0.1/contributing/releasing/</loc>
+        <lastmod>2026-02-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.1/contributing/releasing/"/>
+    </url>
+    <url>
+        <loc>https://docs.kcp.io/init-agent/v0.1/init-sources/</loc>
+        <lastmod>2026-02-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.1/init-sources/"/>
+    </url>
+    <url>
+        <loc>https://docs.kcp.io/init-agent/v0.1/init-sources/inittemplate/</loc>
+        <lastmod>2026-02-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.1/init-sources/inittemplate/"/>
+    </url>
+    <url>
+        <loc>https://docs.kcp.io/init-agent/v0.1/reference/</loc>
+        <lastmod>2026-02-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.1/reference/"/>
+    </url>
+    <url>
+        <loc>https://docs.kcp.io/init-agent/v0.1/reference/crd/initialization.kcp.io/inittargets/</loc>
+        <lastmod>2026-02-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.1/reference/crd/initialization.kcp.io/inittargets/"/>
+    </url>
+    <url>
+        <loc>https://docs.kcp.io/init-agent/v0.1/reference/crd/initialization.kcp.io/inittemplates/</loc>
+        <lastmod>2026-02-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.1/reference/crd/initialization.kcp.io/inittemplates/"/>
+    </url>
+</urlset>
