@@ -26,13 +26,16 @@ import (
 	"time"
 
 	"github.com/kcp-dev/logicalcluster/v3"
+	mcclient "github.com/kcp-dev/multicluster-provider/client"
 	kcpcorev1alpha1 "github.com/kcp-dev/sdk/apis/core/v1alpha1"
 	kcptenancyv1alpha1 "github.com/kcp-dev/sdk/apis/tenancy/v1alpha1"
 
+	corev1 "k8s.io/api/core/v1"
 	rbacv1 "k8s.io/api/rbac/v1"
 	"k8s.io/apiextensions-apiserver/pkg/apihelpers"
 	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/apimachinery/pkg/util/yaml"
 	ctrlruntimeclient "sigs.k8s.io/controller-runtime/pkg/client"
@@ -74,6 +77,40 @@ func CreateAndWaitForWorkspace(t *testing.T, ctx context.Context, client ctrlrun
 	}
 
 	return logicalcluster.Name(testWs.Spec.Cluster)
+}
+
+func WaitForWorkspaceInitialization(t *testing.T, ctx context.Context, clusterClient mcclient.ClusterClient, parentWorkspace logicalcluster.Path, workspaceName string) *kcptenancyv1alpha1.Workspace {
+	t.Helper()
+
+	parentClient := clusterClient.Cluster(parentWorkspace)
+
+	// wait for the agent to do its work and initialize the cluster and ultimately remove the initializer
+	ws := &kcptenancyv1alpha1.Workspace{}
+
+	err := wait.PollUntilContextTimeout(ctx, 500*time.Millisecond, 30*time.Second, false, func(ctx context.Context) (done bool, err error) {
+		err = parentClient.Get(ctx, types.NamespacedName{Name: workspaceName}, ws)
+		if err != nil {
+			return false, err
+		}
+
+		return len(ws.Status.Initializers) == 0, nil
+	})
+	if err != nil {
+		t.Fatalf("Failed to wait for workspace to be initialized: %v", err)
+	}
+
+	// connect into the new workspace and verify it's truly ready (there is a brief delay between
+	// all initializes being gone and the cluster actually being usable)
+	targetClient := clusterClient.Cluster(parentWorkspace.Join(workspaceName))
+
+	err = wait.PollUntilContextTimeout(ctx, 500*time.Millisecond, 30*time.Second, false, func(ctx context.Context) (done bool, err error) {
+		return targetClient.List(ctx, &corev1.NamespaceList{}) == nil, nil
+	})
+	if err != nil {
+		t.Fatalf("Failed to wait for workspace to be usable: %v", err)
+	}
+
+	return ws
 }
 
 func GrantWorkspaceAccess(t *testing.T, ctx context.Context, client ctrlruntimeclient.Client, rbacSubject rbacv1.Subject, extraRules ...rbacv1.PolicyRule) {
