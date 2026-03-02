@@ -1,4 +1,4 @@
-# Installing the Init Agent
+# Development Setup
 
 This page describes the necessary steps to setup the Init Agent for an existing [kcp][kcp] installation.
 
@@ -151,34 +151,6 @@ spec:
 ```
 
 ## Running the Agent
-
-For regular use, the init-agent should be installed using its [Helm chart][helmchart], but for
-debugging purposes it's also possible to run the agent locally.
-
-### Helm Chart
-
-To use the Helm chart, first add the repository to your local system:
-
-```bash
-helm repo add kcp https://kcp-dev.github.io/helm-charts
-helm repo update
-```
-
-At the very least you will have to provide
-
-* a kubeconfig to access kcp
-* the name of the workspace/cluster where the `InitTargets` and other resources
-  reside
-
-Put both in your `myvalues.yaml` (check the `values.yaml` for more examples).
-
-You can now install the chart:
-
-```bash
-helm upgrade --install my-init-agent kcp/init-agent --values ./myvalues.yaml
-```
-
-### Locally
 
 For development purposes you can run the agent directly. You can build your own from
 source or download one of the [ready-made releases][releases]. To run it, you need

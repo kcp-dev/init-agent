@@ -1,9 +1,9 @@
 nav:
   - Documentation:
       - README.md
-      - setup.md
       - readiness.md
       - faq.md
+  - Setup: setup
   - Init Sources: init-sources
   - Reference: reference
   - Contributing: contributing
