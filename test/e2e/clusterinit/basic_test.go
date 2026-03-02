@@ -19,11 +19,8 @@ limitations under the License.
 package clusterinit
 
 import (
-	"context"
-	"slices"
 	"strings"
 	"testing"
-	"time"
 
 	"github.com/go-logr/logr"
 
@@ -31,14 +28,12 @@ import (
 	"github.com/kcp-dev/init-agent/test/utils"
 
 	"github.com/kcp-dev/logicalcluster/v3"
-	kcptenancyinitialization "github.com/kcp-dev/sdk/apis/tenancy/initialization"
 	kcptenancyv1alpha1 "github.com/kcp-dev/sdk/apis/tenancy/v1alpha1"
 
 	corev1 "k8s.io/api/core/v1"
 	rbacv1 "k8s.io/api/rbac/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
-	"k8s.io/apimachinery/pkg/util/wait"
 	ctrlruntime "sigs.k8s.io/controller-runtime"
 )
 
@@ -76,8 +71,6 @@ func TestInitializeNewCluster(t *testing.T) {
 	if err := wstClient.Create(ctx, wst); err != nil {
 		t.Fatalf("Failed to create WorkspaceType: %v", err)
 	}
-
-	initializer := kcptenancyinitialization.InitializerForType(wst)
 
 	utils.GrantWorkspaceAccess(t, ctx, wstClient, utils.Subject(), rbacv1.PolicyRule{
 		APIGroups: []string{"tenancy.kcp.io"},
@@ -185,17 +178,7 @@ metadata:
 	}
 
 	// wait for the agent to do its work and initialize the cluster and ultimately remove the initializer
-	err := wait.PollUntilContextTimeout(ctx, 500*time.Millisecond, 30*time.Second, false, func(ctx context.Context) (done bool, err error) {
-		err = rootClient.Get(ctx, types.NamespacedName{Name: targetWorkspace}, targetWs)
-		if err != nil {
-			return false, err
-		}
-
-		return !slices.Contains(targetWs.Status.Initializers, initializer), nil
-	})
-	if err != nil {
-		t.Fatalf("Failed to wait for workspace to be initialized: %v", err)
-	}
+	targetWs = utils.WaitForWorkspaceInitialization(t, ctx, kcpClusterClient, rootCluster, targetWorkspace)
 
 	// connect into the new workspace and verify the generated content
 	targetClient := kcpClusterClient.Cluster(rootCluster.Join(targetWorkspace))
