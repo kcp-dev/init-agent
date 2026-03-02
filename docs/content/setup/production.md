@@ -205,8 +205,7 @@ Briefly after creating these objects, the resulting kubeconfig Secrets should ap
 namespace. For installing the init-agent, we now need to fetch the admin kubecofig (the first one):
 
 ```bash
-kubectl --namespace my-kcp get secret my-admin-kubeconfig --output json |
-  jq -r '.data.kubeconfig' |
+kubectl --namespace my-kcp get secret my-admin-kubeconfig --output jsonpath="{.data.kubeconfig}" |
   base64 -d > kcp-admin.kubeconfig
 ```
 
@@ -214,9 +213,9 @@ The 2nd kubeconfig Secret can stay in the host cluster, the init-agent will pick
 
 ### kcp Access
 
-Since in this guide, kind is used to provision the hosting cluster, no real Ingress/Gateway exists
-for the kcp-front-proxy. Instead, we will be creating port-forwardings to the front-proxy in order
-to install the init-agent.
+Since this guide uses kind to provision the hosting cluster, no real Ingress/Gateway exists for the
+kcp-front-proxy. Instead, we will be creating port-forwardings to the front-proxy in order to
+install the init-agent.
 
 To accomplish this, **either** edit the `kcp-admin.kubeconfig` and replace the hostnames with
 "localhost", **or** setup a host alias in your system's `/etc/hosts` file. In this guide, we will
@@ -343,3 +342,5 @@ This completes the installation :-) If you have more workspaces than `:root:my-t
 
 You are now ready to create `InitTarget` objects inside the `:root:init-agent` workspace, referring
 to `WorkspaceTypes` in the `:root:my-types` workspace.
+
+[kcp]: https://kcp.io

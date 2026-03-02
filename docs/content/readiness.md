@@ -10,7 +10,7 @@ individual manifests.
 
 ## How It Works
 
-When the init-agent encounters a manifest (from any of its [init sources](./init-sources/)) with
+When the init-agent encounters a manifest (from any of its [init sources](init-sources/README.md)) with
 the `initialization.kcp.io/wait-for-ready` annotation, it will:
 
 1. Create (or confirm the existence of) the object as usual.
