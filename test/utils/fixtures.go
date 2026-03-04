@@ -93,7 +93,10 @@ func WaitForWorkspaceInitialization(t *testing.T, ctx context.Context, clusterCl
 			return false, err
 		}
 
-		return len(ws.Status.Initializers) == 0, nil
+		// Make sure to also look for a cluster ID, otherwise this wait loop might
+		// be so fast, it finishes between the first initializer was added and before
+		// kcp even assigned the cluster name.
+		return ws.Spec.Cluster != "" && len(ws.Status.Initializers) == 0, nil
 	})
 	if err != nil {
 		t.Fatalf("Failed to wait for workspace to be initialized: %v", err)

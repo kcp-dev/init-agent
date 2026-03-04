@@ -31,6 +31,7 @@ import (
 	kcptenancyv1alpha1 "github.com/kcp-dev/sdk/apis/tenancy/v1alpha1"
 
 	rbacv1 "k8s.io/api/rbac/v1"
+	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 	ctrlruntime "sigs.k8s.io/controller-runtime"
@@ -193,51 +194,21 @@ spec:
 	// Verify the CRD exists in the target workspace and is Established
 	targetClient := kcpClusterClient.Cluster(rootCluster.Join(targetWorkspace))
 
-	crd := utils.YAMLToUnstructured(t, `
-apiVersion: apiextensions.k8s.io/v1
-kind: CustomResourceDefinition
-metadata:
-  name: widgets.example.com
-`)
-
-	if err := targetClient.Get(ctx, types.NamespacedName{Name: crd.GetName()}, crd); err != nil {
+	crd := &apiextensionsv1.CustomResourceDefinition{}
+	if err := targetClient.Get(ctx, types.NamespacedName{Name: "widgets.example.com"}, crd); err != nil {
 		t.Fatalf("Failed to find CRD in target workspace: %v", err)
 	}
 
 	// Verify the CRD has the Established condition set to True
-	conditions, found, err := getConditions(crd.Object)
-	if err != nil || !found {
-		t.Fatal("CRD does not have conditions in status")
-	}
-
 	established := false
-	for _, c := range conditions {
-		condition, ok := c.(map[string]any)
-		if !ok {
-			continue
-		}
-
-		cType := condition["type"].(string)
-		cStatus := condition["status"].(string)
-		if cType == "Established" && cStatus == "True" {
+	for _, condition := range crd.Status.Conditions {
+		if condition.Type == apiextensionsv1.Established && condition.Status == apiextensionsv1.ConditionTrue {
 			established = true
 			break
 		}
 	}
 
 	if !established {
-		t.Fatal("Expected CRD to have Established=True condition, but it was not found or not True")
+		t.Fatal("Expected CRD to have Established=True condition, but has not.")
 	}
-}
-
-func getConditions(obj map[string]any) ([]any, bool, error) {
-	status, ok := obj["status"].(map[string]any)
-	if !ok {
-		return nil, false, nil
-	}
-	conditions, ok := status["conditions"].([]any)
-	if !ok {
-		return nil, false, nil
-	}
-	return conditions, true, nil
 }
