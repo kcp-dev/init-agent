@@ -50,7 +50,7 @@ const (
 	ControllerName = "initagent-target-controller"
 )
 
-type NewInitControllerFunc func(remoteManager mcmanager.Manager, targetProvider initcontroller.InitTargetProvider, initializer kcpcorev1alpha1.LogicalClusterInitializer) error
+type NewInitControllerFunc func(remoteManager mcmanager.Manager, targetProvider initcontroller.InitTargetsProvider, initializer kcpcorev1alpha1.LogicalClusterInitializer) error
 
 type Reconciler struct {
 	// Choose to break good practice of never storing a context in a struct,
@@ -65,8 +65,10 @@ type Reconciler struct {
 	newInitController NewInitControllerFunc
 
 	// A map of cancel funcs for the multicluster managers
-	// that we launch for each InitTarget.
+	// that we launch for each WorkspaceType.
 	ctrlCancels map[string]context.CancelCauseFunc
+	// Tracks which InitTarget names belong to each WorkspaceType key.
+	ctrlTargets map[string]map[string]bool
 	ctrlLock    sync.Mutex
 }
 
@@ -86,6 +88,7 @@ func Add(
 		clusterClient:     clusterClient,
 		newInitController: newInitController,
 		ctrlCancels:       map[string]context.CancelCauseFunc{},
+		ctrlTargets:       map[string]map[string]bool{},
 		ctrlLock:          sync.Mutex{},
 	}
 
@@ -125,10 +128,17 @@ func (r *Reconciler) Reconcile(ctx context.Context, req reconcile.Request) (reco
 func (r *Reconciler) ensureInitController(ctx context.Context, log *zap.SugaredLogger, target *initializationv1alpha1.InitTarget) (reconcile.Result, error) {
 	key := getInitTargetKey(target)
 
-	// controller already exists
+	r.ctrlLock.Lock()
 	if _, exists := r.ctrlCancels[key]; exists {
+		// Controller already exists for this WorkspaceType, just track the target.
+		if r.ctrlTargets[key] == nil {
+			r.ctrlTargets[key] = map[string]bool{}
+		}
+		r.ctrlTargets[key][target.Name] = true
+		r.ctrlLock.Unlock()
 		return reconcile.Result{}, nil
 	}
+	r.ctrlLock.Unlock()
 
 	ctrlog := log.With("ctrlkey", key, "name", target.Name)
 
@@ -148,7 +158,7 @@ func (r *Reconciler) ensureInitController(ctx context.Context, log *zap.SugaredL
 		return reconcile.Result{}, fmt.Errorf("failed to create multicluster manager: %w", err)
 	}
 
-	if err := r.newInitController(mgr, r.newInitTargetProvider(target.Name), initializer); err != nil {
+	if err := r.newInitController(mgr, r.newInitTargetsProvider(key), initializer); err != nil {
 		return reconcile.Result{}, fmt.Errorf("failed to create init controller: %w", err)
 	}
 
@@ -156,7 +166,13 @@ func (r *Reconciler) ensureInitController(ctx context.Context, log *zap.SugaredL
 	// context, which might get cancelled right after Reconcile() is done.
 	ctrlCtx, ctrlCancel := context.WithCancelCause(r.ctx)
 
+	r.ctrlLock.Lock()
 	r.ctrlCancels[key] = ctrlCancel
+	if r.ctrlTargets[key] == nil {
+		r.ctrlTargets[key] = map[string]bool{}
+	}
+	r.ctrlTargets[key][target.Name] = true
+	r.ctrlLock.Unlock()
 
 	// cleanup when the context is done
 	go func() {
@@ -166,6 +182,7 @@ func (r *Reconciler) ensureInitController(ctx context.Context, log *zap.SugaredL
 		defer r.ctrlLock.Unlock()
 
 		delete(r.ctrlCancels, key)
+		delete(r.ctrlTargets, key)
 	}()
 
 	// time to start the manager
@@ -181,15 +198,22 @@ func (r *Reconciler) ensureInitController(ctx context.Context, log *zap.SugaredL
 
 func (r *Reconciler) cleanupController(log *zap.SugaredLogger, target *initializationv1alpha1.InitTarget) error {
 	key := getInitTargetKey(target)
-	log.Infow("Stopping init controller…", "ctrlkey", key)
+	log.Infow("Removing InitTarget from controller…", "ctrlkey", key, "target", target.Name)
 
 	r.ctrlLock.Lock()
 	defer r.ctrlLock.Unlock()
 
-	cancel, ok := r.ctrlCancels[key]
-	if ok {
-		cancel(errors.New("controller is no longer needed"))
-		delete(r.ctrlCancels, key)
+	if targets, ok := r.ctrlTargets[key]; ok {
+		delete(targets, target.Name)
+		if len(targets) == 0 {
+			// Last target removed, stop the controller.
+			log.Infow("Stopping init controller (last InitTarget removed)…", "ctrlkey", key)
+			if cancel, ok := r.ctrlCancels[key]; ok {
+				cancel(errors.New("controller is no longer needed"))
+				delete(r.ctrlCancels, key)
+			}
+			delete(r.ctrlTargets, key)
+		}
 	}
 
 	return nil
@@ -250,17 +274,32 @@ func (r *Reconciler) createMulticlusterManager(wst *kcptenancyv1alpha1.Workspace
 	return mgr, nil
 }
 
-func (r *Reconciler) newInitTargetProvider(name string) initcontroller.InitTargetProvider {
-	return func(ctx context.Context) (*initializationv1alpha1.InitTarget, error) {
-		target := &initializationv1alpha1.InitTarget{}
-		if err := r.localClient.Get(ctx, types.NamespacedName{Name: name}, target); err != nil {
-			return nil, err
+func (r *Reconciler) newInitTargetsProvider(wstKey string) initcontroller.InitTargetsProvider {
+	return func(ctx context.Context) ([]*initializationv1alpha1.InitTarget, error) {
+		r.ctrlLock.Lock()
+		targetNames := r.ctrlTargets[wstKey]
+		names := make([]string, 0, len(targetNames))
+		for name := range targetNames {
+			names = append(names, name)
 		}
+		r.ctrlLock.Unlock()
 
-		return target, nil
+		var targets []*initializationv1alpha1.InitTarget
+		for _, name := range names {
+			target := &initializationv1alpha1.InitTarget{}
+			if err := r.localClient.Get(ctx, types.NamespacedName{Name: name}, target); err != nil {
+				if ctrlruntimeclient.IgnoreNotFound(err) == nil {
+					continue // target was deleted
+				}
+				return nil, err
+			}
+			targets = append(targets, target)
+		}
+		return targets, nil
 	}
 }
 
 func getInitTargetKey(target *initializationv1alpha1.InitTarget) string {
-	return string(target.UID)
+	ref := target.Spec.WorkspaceTypeReference
+	return ref.Path + ":" + ref.Name
 }

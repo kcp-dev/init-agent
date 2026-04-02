@@ -89,38 +89,40 @@ func (r *Reconciler) Reconcile(ctx context.Context, request mcreconcile.Request)
 }
 
 func (r *Reconciler) reconcile(ctx context.Context, logger *zap.SugaredLogger, client ctrlruntimeclient.Client, lc *kcpcorev1alpha1.LogicalCluster) (requeue bool, err error) {
-	// Dynamically fetch the latest InitTarget, so that we do not have to restart
-	// (and re-cache) this controller everytime an InitTarget changes.
-	target, err := r.targetProvider(ctx)
+	// Dynamically fetch all InitTargets for this WorkspaceType, so that we do not
+	// have to restart (and re-cache) this controller everytime an InitTarget changes.
+	targets, err := r.targetProvider(ctx)
 	if err != nil {
-		return requeue, fmt.Errorf("failed to get InitTarget: %w", err)
+		return requeue, fmt.Errorf("failed to get InitTargets: %w", err)
 	}
 
-	for idx, ref := range target.Spec.Sources {
-		sourceLog := logger.With("init-target", target.Name, "source-idx", idx)
-		sourceCtx := log.WithLog(ctx, sourceLog)
+	for _, target := range targets {
+		for idx, ref := range target.Spec.Sources {
+			sourceLog := logger.With("init-target", target.Name, "source-idx", idx)
+			sourceCtx := log.WithLog(ctx, sourceLog)
 
-		src, err := r.sourceFactory.NewForInitSource(sourceCtx, kcp.ClusterNameFromObject(target), ref)
-		if err != nil {
-			return requeue, fmt.Errorf("failed to initialize source #%d: %w", idx, err)
-		}
+			src, err := r.sourceFactory.NewForInitSource(sourceCtx, kcp.ClusterNameFromObject(target), ref)
+			if err != nil {
+				return requeue, fmt.Errorf("failed to initialize source #%d from target %s: %w", idx, target.Name, err)
+			}
 
-		objects, err := src.Manifests(lc)
-		if err != nil {
-			return requeue, fmt.Errorf("failed to render source #%d: %w", idx, err)
-		}
+			objects, err := src.Manifests(lc)
+			if err != nil {
+				return requeue, fmt.Errorf("failed to render source #%d from target %s: %w", idx, target.Name, err)
+			}
 
-		sourceLog.Debugf("Source yielded %d manifests", len(objects))
+			sourceLog.Debugf("Source yielded %d manifests", len(objects))
 
-		srcNeedRequeue, err := r.manifestApplier.Apply(sourceCtx, client, objects)
-		if err != nil {
-			return requeue, fmt.Errorf("failed to apply source #%d: %w", idx, err)
-		}
+			srcNeedRequeue, err := r.manifestApplier.Apply(sourceCtx, client, objects)
+			if err != nil {
+				return requeue, fmt.Errorf("failed to apply source #%d from target %s: %w", idx, target.Name, err)
+			}
 
-		// If one source cannot be completed at this time, continue with the others.
-		if srcNeedRequeue {
-			sourceLog.Debug("Source requires requeuing")
-			requeue = true
+			// If one source cannot be completed at this time, continue with the others.
+			if srcNeedRequeue {
+				sourceLog.Debug("Source requires requeuing")
+				requeue = true
+			}
 		}
 	}
 
