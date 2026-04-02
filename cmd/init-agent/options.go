@@ -34,9 +34,9 @@ type Options struct {
 	// work.
 	// KubeconfigFile string
 
-	// ConfigWorkspace is the kcp workspace (either a path or a cluster name)
-	// where the InitTarget and InitTemplate objects live that should be processed
-	// by this init-agent.
+	// ConfigWorkspace is the kcp workspace (either a path, a cluster name, or a
+	// URL path starting with / for virtual workspaces) where the InitTarget and
+	// InitTemplate objects live that should be processed by this init-agent.
 	ConfigWorkspace string
 
 	// Whether or not to perform leader election (requires permissions to
@@ -67,7 +67,7 @@ func NewOptions() *Options {
 func (o *Options) AddFlags(flags *pflag.FlagSet) {
 	o.LogOptions.AddPFlags(flags)
 
-	flags.StringVar(&o.ConfigWorkspace, "config-workspace", o.ConfigWorkspace, "kcp workspace or cluster where the InitTargets live that should be processed")
+	flags.StringVar(&o.ConfigWorkspace, "config-workspace", o.ConfigWorkspace, "kcp workspace, cluster, or URL path (starting with /) where the InitTargets live that should be processed")
 	flags.StringVar(&o.InitTargetSelectorString, "init-target-selector", o.InitTargetSelectorString, "restrict to only process InitTargets matching this label selector (optional)")
 	flags.BoolVar(&o.EnableLeaderElection, "enable-leader-election", o.EnableLeaderElection, "whether to perform leader election")
 	flags.StringVar(&o.LeaderElectionNamespace, "leader-election-namespace", o.LeaderElectionNamespace, "Kubernetes namespace for the leader election lease")
