@@ -21,6 +21,7 @@ import (
 	"flag"
 	"fmt"
 	golog "log"
+	"strings"
 
 	"github.com/go-logr/zapr"
 	"github.com/spf13/pflag"
@@ -145,7 +146,15 @@ func setupManager(ctx context.Context, cfg *rest.Config, opts *Options) (manager
 		return nil, fmt.Errorf("failed to register local scheme %s: %w", initializationv1alpha1.SchemeGroupVersion, err)
 	}
 
-	cfg = kcp.RetargetRestConfig(cfg, logicalcluster.Name(opts.ConfigWorkspace))
+	// Preserve the base config for leader election before retargeting,
+	// because virtual workspace URLs do not support coordination/v1 leases.
+	leaderElectionCfg := rest.CopyConfig(cfg)
+
+	if strings.HasPrefix(opts.ConfigWorkspace, "/") {
+		cfg = kcp.RetargetRestConfigToPath(cfg, opts.ConfigWorkspace)
+	} else {
+		cfg = kcp.RetargetRestConfig(cfg, logicalcluster.Name(opts.ConfigWorkspace))
+	}
 
 	return manager.New(cfg, manager.Options{
 		Scheme: scheme,
@@ -156,6 +165,7 @@ func setupManager(ctx context.Context, cfg *rest.Config, opts *Options) (manager
 		LeaderElection:          opts.EnableLeaderElection,
 		LeaderElectionID:        "init-agent.kcp.io",
 		LeaderElectionNamespace: opts.LeaderElectionNamespace,
+		LeaderElectionConfig:    leaderElectionCfg,
 		HealthProbeBindAddress:  opts.HealthAddr,
 	})
 }

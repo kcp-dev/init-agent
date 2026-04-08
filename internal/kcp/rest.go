@@ -34,9 +34,19 @@ func RetargetRestConfig(cfg *rest.Config, cluster logicalcluster.Name) *rest.Con
 	return stripped
 }
 
+// RetargetRestConfigToPath retargets the rest config to a direct URL path
+// (e.g., a virtual workspace path like /services/apiexport/...).
+// The path is appended directly to the stripped host URL.
+func RetargetRestConfigToPath(cfg *rest.Config, path string) *rest.Config {
+	stripped := StripCluster(cfg)
+	stripped.Host = strings.TrimRight(stripped.Host, "/") + path
+	return stripped
+}
+
 func StripCluster(cfg *rest.Config) *rest.Config {
 	clone := rest.CopyConfig(cfg)
-	clone.Host = strings.TrimRight(clusterFinder.ReplaceAllString(cfg.Host, ""), "/")
+	host := strings.TrimRight(cfg.Host, "/")
+	clone.Host = strings.TrimRight(clusterFinder.ReplaceAllString(host, ""), "/")
 
 	return clone
 }
