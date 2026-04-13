@@ -1186,8 +1186,11 @@ that backs a workspace. Initializers are the cluster name + name of the <code>Wo
 <p>Since each <code>WorkspaceType</code> has exactly one (optional) initializer name, and it can only be
 removed once from a <code>LogicalCluster</code>, it's critical that you use dedicated workspace types for
 every bootstrapping purpose.</p>
-<p>This means there can only be exactly one <code>InitTarget</code> in the entire kcp installation that refers
-to a <code>WorkspaceType</code>. And only a single init-agent may process each <code>InitTarget</code>.</p>
+<p>Multiple <code>InitTarget</code> resources may refer to the same <code>WorkspaceType</code>. The init-agent aggregates
+the sources from all of them into a single initialization pass and only removes the initializer
+after every source from every target has been applied. This lets you compose bootstrapping
+behavior from independently authored <code>InitTargets</code> (e.g. RBAC, quotas, networking) without
+racing on the initializer. Only a single init-agent may process a given <code>WorkspaceType</code>.</p>
 <p><strong>Do not</strong> use the init-agent with kcp's own <code>WorkspaceTypes</code>, as this could interfere with
 kcp's core functionality.</p>
 <p>You can make use of <code>WorkspaceTypes</code> extending each other to combine more complex bootstrapping
