@@ -38,11 +38,11 @@ const (
 	ControllerName = "initagent-init"
 )
 
-type InitTargetProvider func(ctx context.Context) (*initializationv1alpha1.InitTarget, error)
+type InitTargetsProvider func(ctx context.Context) ([]*initializationv1alpha1.InitTarget, error)
 
 type Reconciler struct {
 	remoteManager   mcmanager.Manager
-	targetProvider  InitTargetProvider
+	targetProvider  InitTargetsProvider
 	log             *zap.SugaredLogger
 	sourceFactory   *source.Factory
 	manifestApplier manifest.Applier
@@ -53,7 +53,7 @@ type Reconciler struct {
 // as this controller is started/stopped by the syncmanager controller instead.
 func Create(
 	remoteManager mcmanager.Manager,
-	targetProvider InitTargetProvider,
+	targetProvider InitTargetsProvider,
 	sourceFactory *source.Factory,
 	manifestApplier manifest.Applier,
 	initializer kcpcorev1alpha1.LogicalClusterInitializer,

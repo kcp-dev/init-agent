@@ -119,7 +119,7 @@ func run(ctx context.Context, log *zap.SugaredLogger, opts *Options) error {
 
 	// wrap this controller creation in a closure to prevent giving all the initcontroller
 	// dependencies to the targetcontroller
-	newInitController := func(remoteManager mcmanager.Manager, targetProvider initcontroller.InitTargetProvider, initializer kcpcorev1alpha1.LogicalClusterInitializer) error {
+	newInitController := func(remoteManager mcmanager.Manager, targetProvider initcontroller.InitTargetsProvider, initializer kcpcorev1alpha1.LogicalClusterInitializer) error {
 		return initcontroller.Create(remoteManager, targetProvider, sourceFactory, manifestApplier, initializer, log, numInitWorkers)
 	}
 
