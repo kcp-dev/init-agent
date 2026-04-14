@@ -74,7 +74,7 @@ func (r *Reconciler) Reconcile(ctx context.Context, request mcreconcile.Request)
 
 	requeue, err := r.reconcile(ctx, logger, client, lc)
 	if err != nil {
-		recorder := cluster.GetEventRecorderFor(ControllerName)
+		recorder := cluster.GetEventRecorderFor(ControllerName) //nolint:staticcheck // https://github.com/kcp-dev/init-agent/issues/24
 		recorder.Eventf(lc, corev1.EventTypeWarning, "ReconcilingFailed", "Failed to initialize cluster: %s.", err)
 
 		return reconcile.Result{}, err
