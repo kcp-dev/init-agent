@@ -2,73 +2,73 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
         <loc>https://docs.kcp.io/init-agent/v0.2/</loc>
-        <lastmod>2026-03-04</lastmod>
+        <lastmod>2026-04-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.2/"/>
     </url>
     <url>
         <loc>https://docs.kcp.io/init-agent/v0.2/faq/</loc>
-        <lastmod>2026-03-04</lastmod>
+        <lastmod>2026-04-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.2/faq/"/>
     </url>
     <url>
         <loc>https://docs.kcp.io/init-agent/v0.2/readiness/</loc>
-        <lastmod>2026-03-04</lastmod>
+        <lastmod>2026-04-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.2/readiness/"/>
     </url>
     <url>
         <loc>https://docs.kcp.io/init-agent/v0.2/contributing/releasing/</loc>
-        <lastmod>2026-03-04</lastmod>
+        <lastmod>2026-04-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.2/contributing/releasing/"/>
     </url>
     <url>
         <loc>https://docs.kcp.io/init-agent/v0.2/init-sources/</loc>
-        <lastmod>2026-03-04</lastmod>
+        <lastmod>2026-04-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.2/init-sources/"/>
     </url>
     <url>
         <loc>https://docs.kcp.io/init-agent/v0.2/init-sources/inittemplate/</loc>
-        <lastmod>2026-03-04</lastmod>
+        <lastmod>2026-04-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.2/init-sources/inittemplate/"/>
     </url>
     <url>
         <loc>https://docs.kcp.io/init-agent/v0.2/reference/</loc>
-        <lastmod>2026-03-04</lastmod>
+        <lastmod>2026-04-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.2/reference/"/>
     </url>
     <url>
         <loc>https://docs.kcp.io/init-agent/v0.2/reference/crd/initialization.kcp.io/inittargets/</loc>
-        <lastmod>2026-03-04</lastmod>
+        <lastmod>2026-04-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.2/reference/crd/initialization.kcp.io/inittargets/"/>
     </url>
     <url>
         <loc>https://docs.kcp.io/init-agent/v0.2/reference/crd/initialization.kcp.io/inittemplates/</loc>
-        <lastmod>2026-03-04</lastmod>
+        <lastmod>2026-04-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.2/reference/crd/initialization.kcp.io/inittemplates/"/>
     </url>
     <url>
         <loc>https://docs.kcp.io/init-agent/v0.2/setup/</loc>
-        <lastmod>2026-03-04</lastmod>
+        <lastmod>2026-04-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.2/setup/"/>
     </url>
     <url>
         <loc>https://docs.kcp.io/init-agent/v0.2/setup/development/</loc>
-        <lastmod>2026-03-04</lastmod>
+        <lastmod>2026-04-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.2/setup/development/"/>
     </url>
     <url>
         <loc>https://docs.kcp.io/init-agent/v0.2/setup/production/</loc>
-        <lastmod>2026-03-04</lastmod>
+        <lastmod>2026-04-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.kcp.io/init-agent/v0.2/setup/production/"/>
     </url>
