@@ -104,6 +104,8 @@ github.com/kcp-dev/multicluster-provider v0.3.4-0.20260114155146-4b148fae0309 h1
 github.com/kcp-dev/multicluster-provider v0.3.4-0.20260114155146-4b148fae0309/go.mod h1:4QGU39wyNztoYNatdWqbdOV6/R9ZzaIh4DdSj30dm9o=
 github.com/kcp-dev/multicluster-provider v0.6.0 h1:t7Wac92T4dde9DMMVqA/VPhNhrqkgZ4/Cyij0yh0M5s=
 github.com/kcp-dev/multicluster-provider v0.6.0/go.mod h1:pJvWD+5dP+aMsntlu7sBG7oOmYrWfuWKqDQ8WBHur34=
+github.com/kcp-dev/multicluster-provider/client v0.0.0-20260412105142-7979b3b2700b h1:1f7JwDEVVQOAusprI82rxU3iYLbEe16TYv7iyHFJarY=
+github.com/kcp-dev/multicluster-provider/client v0.0.0-20260412105142-7979b3b2700b/go.mod h1:kK9CSLmECoRiOU+xKOhIE4tHpQBcBbBvWOgKORC/eqI=
 github.com/kcp-dev/sdk v0.29.0 h1:zXJjtcKNduy8MntSdf2CoXSMVWybptPJwq0zKBkf0Iw=
 github.com/kcp-dev/sdk v0.29.0/go.mod h1:iOA3cEMbI7jeLHbfc0GlHSXRHfyhOWC0NDEJRdNcBY8=
 github.com/kcp-dev/sdk v0.31.0 h1:fLqgY6MHVmmBcttqR/V3h2Dnv7xmab84FTKTwV08+Bo=
