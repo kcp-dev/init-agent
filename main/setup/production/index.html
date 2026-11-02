@@ -1330,7 +1330,7 @@ for the kcp PKI. Create this <code>Issuer</code> on the host cluster:</p>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">  </span><span class="c1"># To make accessing kcp through a port-forwarding easier,</span>
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">  </span><span class="c1"># you can either include localhost in the serving cert, like shown here,</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">  </span><span class="c1"># or setup a hostname alias in your system&#39;s /etc/hosts file.</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">  </span><span class="c1"># or setup a hostname alias in your system's /etc/hosts file.</span>
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">  </span><span class="nt">certificateTemplates</span><span class="p">:</span>
 <a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="nt">server</span><span class="p">:</span>
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">      </span><span class="nt">spec</span><span class="p">:</span>
@@ -1430,7 +1430,7 @@ will also need to communicate with kcp. This means we need two different kubecon
 </code></pre></div>
 <p>Briefly after creating these objects, the resulting kubeconfig Secrets should appear in the <code>my-kcp</code>
 namespace. For installing the init-agent, we now need to fetch the admin kubecofig (the first one):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>--namespace<span class="w"> </span>my-kcp<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>my-admin-kubeconfig<span class="w"> </span>--output<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.kubeconfig}&quot;</span><span class="w"> </span><span class="p">|</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>--namespace<span class="w"> </span>my-kcp<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>my-admin-kubeconfig<span class="w"> </span>--output<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">"{.data.kubeconfig}"</span><span class="w"> </span><span class="p">|</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>base64<span class="w"> </span>-d<span class="w"> </span>&gt;<span class="w"> </span>kcp-admin.kubeconfig
 </code></pre></div>
 <p>The 2nd kubeconfig Secret can stay in the host cluster, the init-agent will pick it up itself.</p>
@@ -1454,13 +1454,13 @@ to get inspired. You will have to configure a few things, like the <code>configC
 <p>For this guide, we will be using the following Helm values:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># created by the kcp-operator via a Certificate for us,</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># we can just use it directly</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nt">kcpKubeconfig</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;init-agent-my-root-kubeconfig&quot;</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nt">kcpKubeconfig</span><span class="p">:</span><span class="w"> </span><span class="s">"init-agent-my-root-kubeconfig"</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1"># the &quot;home&quot; workspace for this installation of the init-agent</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="nt">configWorkspace</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;root:init-agent&quot;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1"># the "home" workspace for this installation of the init-agent</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="nt">configWorkspace</span><span class="p">:</span><span class="w"> </span><span class="s">"root:init-agent"</span>
 <a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
 <a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="c1"># Configuration for the config workspace, where the InitTargets</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="c1"># and related objects live. This is the &quot;home&quot; workspace for the init-agent,</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="c1"># and related objects live. This is the "home" workspace for the init-agent,</span>
 <a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="c1"># where also leader election happens.</span>
 <a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="nt">configCluster</span><span class="p">:</span>
 <a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">  </span><span class="c1"># Required: RBAC Subject defines how the init-agent is authenticated in kcp.</span>
@@ -1472,7 +1472,7 @@ to get inspired. You will have to configure a few things, like the <code>configC
 <a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="c1"># Configuration exclusively for all the clusters (workspaces) in which the</span>
 <a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="c1"># init-agent is meant to read and initialize WorkspaceTypes in. The chart needs</span>
 <a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="c1"># to be installed into each of them to provision the necessary RBAC.</span>
-<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="c1"># Set target to &quot;wstcluster&quot; for this mode.</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="c1"># Set target to "wstcluster" for this mode.</span>
 <a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="nt">wstCluster</span><span class="p">:</span>
 <a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="w">  </span><span class="c1"># Required: RBAC Subject defines how the init-agent is authenticated in kcp.</span>
 <a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">  </span><span class="c1"># This field entirely depends on the kubeconfig you provide to the init-agent.</span>
@@ -1489,7 +1489,7 @@ to get inspired. You will have to configure a few things, like the <code>configC
 <a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">  </span>--install<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">  </span>--namespace<span class="w"> </span>my-kcp<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">  </span>--values<span class="w"> </span>values.yaml<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">  </span>--set<span class="w"> </span><span class="s2">&quot;target=&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">  </span>--set<span class="w"> </span><span class="s2">"target="</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">  </span>my-init-agent<span class="w"> </span>kcp/init-agent
 </code></pre></div>
 <h3 id="kcp-workspaces">kcp Workspaces</h3>
@@ -1517,7 +1517,7 @@ workspace:</p>
 <a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">  </span>--namespace<span class="w"> </span>kcp-init-agent<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">  </span>--create-namespace<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">  </span>--values<span class="w"> </span>values.yaml<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">  </span>--set<span class="w"> </span><span class="s2">&quot;target=configcluster&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">  </span>--set<span class="w"> </span><span class="s2">"target=configcluster"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">  </span>my-init-agent<span class="w"> </span>kcp/init-agent
 <a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>
 <a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="c1"># Namespace is only used for storing the Helm release itself</span>
@@ -1528,7 +1528,7 @@ workspace:</p>
 <a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="w">  </span>--namespace<span class="w"> </span>my-kcp<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="w">  </span>--create-namespace<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="w">  </span>--values<span class="w"> </span>values.yaml<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="w">  </span>--set<span class="w"> </span><span class="s2">&quot;target=wstcluster&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="w">  </span>--set<span class="w"> </span><span class="s2">"target=wstcluster"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="w">  </span>my-init-agent<span class="w"> </span>kcp/init-agent
 <a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>
 <a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a><span class="c1"># remember to be safe and return to the root workspace</span>
