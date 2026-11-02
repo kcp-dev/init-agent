@@ -1,6 +1,6 @@
 module github.com/kcp-dev/init-agent
 
-go 1.26.3
+go 1.26.10
 
 replace github.com/kcp-dev/init-agent/sdk => ./sdk
 
