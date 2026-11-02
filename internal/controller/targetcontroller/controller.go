@@ -42,6 +42,7 @@ import (
 	ctrlruntimeclient "sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
+	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 	mcmanager "sigs.k8s.io/multicluster-runtime/pkg/manager"
 )
@@ -266,6 +267,12 @@ func (r *Reconciler) createMulticlusterManager(wst *kcptenancyv1alpha1.Workspace
 
 	mgr, err := mcmanager.New(wstConfig, provider, manager.Options{
 		Scheme: scheme,
+
+		// Every WorkspaceType gets its own multicluster manager in this process, but
+		// controller-runtime's metrics server defaults to ":8080", so the second manager
+		// fails to come up with "listen tcp :8080: bind: address already in use" and its
+		// WorkspaceType is never initialized. Only the main manager needs to serve metrics.
+		Metrics: metricsserver.Options{BindAddress: "0"},
 	})
 	if err != nil {
 		return nil, fmt.Errorf("failed to create manager: %w", err)
